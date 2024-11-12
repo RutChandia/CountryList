@@ -29,6 +29,8 @@ class CountryViewModel @Inject constructor(
     }
 
     private fun fetchFilteredCountries() {
+        if (countryList.value != null) return
+
         apiState.value = ApiResponseState.Loading()
 
         viewModelScope.launch(Dispatchers.IO) {
