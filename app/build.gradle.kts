@@ -48,6 +48,7 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/LICENSE*"
         }
     }
 }
@@ -61,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+
     //Material 3
     implementation(libs.androidx.material3)
 
@@ -73,6 +75,13 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    //Coil
+    implementation(libs.coil.compose)
+
+    //Mockk
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

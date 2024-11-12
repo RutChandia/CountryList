@@ -1,4 +1,4 @@
-package cl.rutchandia.thesportsapp.data.repository
+package cl.rutchandia.thesportsapp.data.implementation
 
 import cl.rutchandia.thesportsapp.data.mapper.CountryMapper
 import cl.rutchandia.thesportsapp.data.remote.ApiResponseState
@@ -15,7 +15,7 @@ class CountryRepositoryImpl @Inject constructor(
     override suspend fun getAllCountries(): ApiResponseState<List<Country>> {
         return doNetworkCall {
             val response = apiService.getAllCountries()
-            mapper.dtoToDomain(response)
+            mapper.dtoToDomain(response.countries)
         }
     }
 }
