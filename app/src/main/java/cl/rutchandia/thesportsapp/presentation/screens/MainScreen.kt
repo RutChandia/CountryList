@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -67,11 +68,11 @@ private fun MainScreenContent(
         }
 
         is ApiResponseState.Error -> {
-            TryAgainButton(onTryAgain)
+            TryAgainButton(onTryAgain, apiState.messageId)
         }
 
         null -> {
-            TryAgainButton(onTryAgain)
+            TryAgainButton(onTryAgain, R.string.loading_message)
         }
     }
 }
@@ -81,9 +82,14 @@ private fun CountryList(
     countries: List<Country>
 ) {
     var searchText by remember { mutableStateOf("") }
-    val filteredCountries = countries.filter { country ->
-        country.name.contains(searchText, ignoreCase = true)
+    val filteredCountries = remember(countries, searchText) {
+        derivedStateOf {
+            countries.filter { country ->
+                country.name.contains(searchText, ignoreCase = true)
+            }
+        }
     }
+
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
             value = searchText,
@@ -100,7 +106,7 @@ private fun CountryList(
             )
         )
         LazyColumn {
-            items(filteredCountries) { country ->
+            items(filteredCountries.value) { country ->
                 CardCountry(
                     countryName = country.name,
                     countryFlag = country.flagUrl

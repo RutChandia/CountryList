@@ -12,12 +12,13 @@ import androidx.compose.ui.res.stringResource
 import cl.rutchandia.thesportsapp.R
 
 @Composable
-fun TryAgainButton(onTryAgain: () -> Unit) {
+fun TryAgainButton(onTryAgain: () -> Unit, message: Int) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        StateMessage(message = message)
         Button(onClick = onTryAgain) {
             Text(text = stringResource(R.string.try_again))
         }

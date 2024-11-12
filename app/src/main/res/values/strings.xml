@@ -6,4 +6,5 @@
     <string name="api_error">API Error</string>
     <string name="try_again">Try Again</string>
     <string name="search">search</string>
+    <string name="loading_message">Loading countries</string>
 </resources>
